@@ -1,0 +1,148 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body{
+    background: #f4f7fc;
+    padding: 30px;
+}
+
+/* HEADINGS */
+
+h1{
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+h2{
+    margin-bottom: 15px;
+    color: #444;
+}
+
+/* FORM CONTAINER */
+
+form{
+    width: 350px;
+    margin: auto;
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
+}
+
+/* INPUT FIELDS */
+
+input{
+    width: 100%;
+    padding: 12px;
+    margin-top: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    outline: none;
+    font-size: 15px;
+}
+
+input:focus{
+    border-color: #4a90e2;
+}
+
+/* BUTTONS */
+
+button{
+    padding: 12px 20px;
+    margin-top: 15px;
+    border: none;
+    border-radius: 8px;
+    background: #4a90e2;
+    color: white;
+    cursor: pointer;
+    font-size: 15px;
+    transition: 0.3s;
+}
+
+button:hover{
+    background: #357abd;
+}
+
+/* DASHBOARD BUTTONS */
+
+.dashboard-buttons{
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    margin-top: 30px;
+    flex-wrap: wrap;
+}
+
+/* BOOK CARDS */
+
+.book-card{
+    background: white;
+    padding: 20px;
+    margin: 20px auto;
+    border-radius: 12px;
+    width: 400px;
+    box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
+}
+
+.book-card h2{
+    color: #222;
+    margin-bottom: 10px;
+}
+
+.book-card p{
+    margin: 8px 0;
+    color: #555;
+}
+
+/* NAVBAR */
+
+.navbar{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #4a90e2;
+    padding: 15px 25px;
+    border-radius: 10px;
+    margin-bottom: 30px;
+}
+
+.navbar h2{
+    color: white;
+}
+
+.nav-links{
+    display: flex;
+    gap: 15px;
+}
+
+.nav-links button{
+    background: white;
+    color: #4a90e2;
+}
+
+.nav-links button:hover{
+    background: #e6eefc;
+}
+
+/* RESPONSIVE */
+
+@media(max-width: 500px){
+
+    form{
+        width: 100%;
+    }
+
+    .book-card{
+        width: 100%;
+    }
+
+    .dashboard-buttons{
+        flex-direction: column;
+        align-items: center;
+    }
+}

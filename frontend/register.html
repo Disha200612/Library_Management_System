@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Register</title>
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<h1>Register</h1>
+
+<form id="registerForm">
+
+    <input
+        type="text"
+        id="name"
+        placeholder="Enter Name"
+        required
+    >
+
+    <input
+        type="email"
+        id="email"
+        placeholder="Enter Email"
+        required
+    >
+
+    <input
+        type="password"
+        id="password"
+        placeholder="Enter Password"
+        required
+    >
+
+    <button
+        type="button"
+        onclick="registerUser()"
+    >
+        Register
+    </button>
+
+</form>
+
+<br>
+
+<center>
+
+    <a href="/login.html">
+        Already have account? Login
+    </a>
+
+</center>
+
+<script>
+
+async function registerUser(){
+
+    const name =
+    document.getElementById("name").value;
+
+    const email =
+    document.getElementById("email").value;
+
+    const password =
+    document.getElementById("password").value;
+
+    const formData = new FormData();
+
+    formData.append("name", name);
+
+    formData.append("email", email);
+
+    formData.append("password", password);
+
+    try{
+
+        const response = await fetch(
+            "http://127.0.0.1:8000/register",
+            {
+                method: "POST",
+                body: formData
+            }
+        );
+
+        const data = await response.json();
+
+        alert(data.message || data.error);
+
+        if(
+            data.message ===
+            "User Registered Successfully"
+        ){
+
+            window.location.href =
+            "/login.html";
+
+        }
+
+    }
+
+    catch(error){
+
+        console.log(error);
+
+        alert("Registration Failed");
+
+    }
+
+}
+
+</script>
+
+</body>
+</html>

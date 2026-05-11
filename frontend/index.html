@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library Management System</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+
+        .home-container{
+            text-align: center;
+            margin-top: 120px;
+        }
+
+        .home-container h1{
+            font-size: 45px;
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+
+        .home-container p{
+            font-size: 20px;
+            color: #555;
+            margin-bottom: 40px;
+        }
+
+        .home-buttons{
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .home-buttons button{
+            width: 150px;
+            font-size: 16px;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <div class="home-container">
+
+        <h1>Library Management System</h1>
+
+        <p>
+            Manage books, users, issued books and leaderboard easily.
+        </p>
+
+        <div class="home-buttons">
+
+            <button onclick="goLogin()">
+                Login
+            </button>
+
+            <button onclick="goRegister()">
+                Register
+            </button>
+
+        </div>
+
+    </div>
+
+<script>
+
+function goLogin(){
+
+    window.location.href = "login.html";
+
+}
+
+function goRegister(){
+
+    window.location.href = "register.html";
+
+}
+
+</script>
+
+</body>
+</html>

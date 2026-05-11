@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Leaderboard</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body{
+            background: #f4f4fb;
+            display: flex;
+        }
+
+        /* SIDEBAR */
+
+        .sidebar{
+
+            width: 250px;
+            height: 100vh;
+
+            background:
+            linear-gradient(
+                to bottom,
+                #241b4b,
+                #3d2c8d
+            );
+
+            color: white;
+
+            padding: 30px 20px;
+
+            position: fixed;
+        }
+
+        .logo{
+
+            font-size: 28px;
+            font-weight: bold;
+
+            margin-bottom: 50px;
+        }
+
+        .menu{
+            list-style: none;
+        }
+
+        .menu li{
+            margin: 20px 0;
+        }
+
+        .menu a{
+
+            color: white;
+
+            text-decoration: none;
+
+            font-size: 18px;
+
+            display: block;
+
+            padding: 12px;
+
+            border-radius: 10px;
+
+            transition: 0.3s;
+        }
+
+        .menu a:hover{
+            background: rgba(255,255,255,0.2);
+        }
+
+        /* MAIN */
+
+        .main{
+
+            margin-left: 270px;
+
+            width: calc(100% - 270px);
+
+            padding: 30px;
+        }
+
+        h1{
+            color: #333;
+            margin-bottom: 30px;
+        }
+
+        table{
+
+            width: 100%;
+
+            border-collapse: collapse;
+
+            background: white;
+
+            border-radius: 20px;
+
+            overflow: hidden;
+
+            box-shadow:
+            0px 5px 15px rgba(0,0,0,0.1);
+        }
+
+        th{
+
+            background: #6c63ff;
+
+            color: white;
+
+            padding: 18px;
+
+            text-align: center;
+        }
+
+        td{
+
+            padding: 18px;
+
+            text-align: center;
+
+            border-bottom:
+            1px solid #eee;
+        }
+
+        tr:hover{
+            background: #f4f4fb;
+        }
+
+        .top-user{
+
+            font-weight: bold;
+
+            color: #6c63ff;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <!-- SIDEBAR -->
+
+    <div class="sidebar">
+
+        <div class="logo">
+            📚 Library
+        </div>
+
+        <ul class="menu">
+
+            <li>
+                <a href="/dashboard.html">
+                    🏠 Dashboard
+                </a>
+            </li>
+
+            <li>
+                <a href="/books.html">
+                    📖 View Books
+                </a>
+            </li>
+
+            <li>
+                <a href="/mybooks.html">
+                    📚 My Books
+                </a>
+            </li>
+
+            <li>
+                <a href="/leaderboard.html">
+                    🏆 Leaderboard
+                </a>
+            </li>
+
+            <!-- ADMIN MENU -->
+
+            <li id="adminMenu">
+
+                <a href="/admin.html">
+                    👨‍💼 Admin Panel
+                </a>
+
+            </li>
+
+            <li>
+
+                <a
+                    href="/login.html"
+                    onclick="logout()"
+                >
+                    🚪 Logout
+                </a>
+
+            </li>
+
+        </ul>
+
+    </div>
+
+    <!-- MAIN -->
+
+    <div class="main">
+
+        <h1>
+            🏆 Library Leaderboard
+        </h1>
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>Rank</th>
+
+                    <th>Name</th>
+
+                    <th>Books Issued</th>
+
+                    <th>Points</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody id="leaderboardBody">
+
+                <tr>
+
+                    <td>🥇</td>
+
+                    <td class="top-user">
+                        Disha
+                    </td>
+
+                    <td>10</td>
+
+                    <td>100</td>
+
+                </tr>
+
+                <tr>
+
+                    <td>🥈</td>
+
+                    <td>
+                        Ravi
+                    </td>
+
+                    <td>8</td>
+
+                    <td>80</td>
+
+                </tr>
+
+                <tr>
+
+                    <td>🥉</td>
+
+                    <td>
+                        Anjali
+                    </td>
+
+                    <td>6</td>
+
+                    <td>60</td>
+
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+<script>
+
+/* GET ROLE */
+
+const role =
+localStorage.getItem("role");
+
+/* HIDE ADMIN FOR STUDENTS */
+
+if(role !== "admin"){
+
+    document.getElementById("adminMenu")
+    .style.display = "none";
+
+}
+
+/* LOGOUT */
+
+function logout(){
+
+    localStorage.clear();
+
+}
+
+</script>
+
+</body>
+
+</html>

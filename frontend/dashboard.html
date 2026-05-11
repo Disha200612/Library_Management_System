@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Creative Dashboard</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body{
+            background: #f4f4fb;
+            display: flex;
+        }
+
+        .sidebar{
+            width: 250px;
+            height: 100vh;
+            background: linear-gradient(to bottom, #241b4b, #3d2c8d);
+            color: white;
+            padding: 30px 20px;
+            position: fixed;
+        }
+
+        .logo{
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 50px;
+        }
+
+        .menu{
+            list-style: none;
+        }
+
+        .menu li{
+            margin: 20px 0;
+        }
+
+        .menu a{
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            display: block;
+            padding: 12px;
+            border-radius: 10px;
+            transition: 0.3s;
+        }
+
+        .menu a:hover{
+            background: rgba(255,255,255,0.2);
+        }
+
+        .main{
+            margin-left: 260px;
+            width: calc(100% - 260px);
+            padding: 30px;
+        }
+
+        .topbar{
+            margin-bottom: 30px;
+        }
+
+        .topbar h1{
+            color: #333;
+        }
+
+        .topbar span{
+            color: #6c63ff;
+        }
+
+        .stats{
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .card{
+            background: white;
+            padding: 25px;
+            border-radius: 20px;
+            box-shadow: 0px 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .card h2{
+            font-size: 35px;
+            color: #6c63ff;
+            margin-bottom: 10px;
+        }
+
+        .card p{
+            color: #666;
+        }
+
+        .actions{
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .action-card{
+            background: white;
+            padding: 25px;
+            border-radius: 20px;
+            box-shadow: 0px 5px 15px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .action-card h3{
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .quote{
+            background: linear-gradient(to right, #6c63ff, #8f94fb);
+            padding: 35px;
+            border-radius: 20px;
+            color: white;
+            text-align: center;
+        }
+
+        button{
+            width: 100%;
+            background: #6c63ff;
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover{
+            background: #574bdb;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <!-- SIDEBAR -->
+
+    <div class="sidebar">
+
+        <div class="logo">
+            📚 Library
+        </div>
+
+        <ul class="menu">
+
+            <li>
+                <a href="/dashboard.html">
+                    🏠 Dashboard
+                </a>
+            </li>
+
+            <li>
+                <a href="/books.html">
+                    📖 View Books
+                </a>
+            </li>
+
+            <li>
+                <a href="/mybooks.html">
+                    📚 My Books
+                </a>
+            </li>
+
+            <li>
+                <a href="/leaderboard.html">
+                    🏆 Leaderboard
+                </a>
+            </li>
+
+            <!-- ADMIN MENU -->
+
+            <li id="adminMenu">
+
+                <a href="/admin.html">
+                    👨‍💼 Admin Panel
+                </a>
+
+            </li>
+
+            <li>
+
+                <a href="/login.html" onclick="logout()">
+                    🚪 Logout
+                </a>
+
+            </li>
+
+        </ul>
+
+    </div>
+
+    <!-- MAIN -->
+
+    <div class="main">
+
+        <div class="topbar">
+
+            <h1>
+
+                Welcome back,
+
+                <span id="username">
+                    User
+                </span>
+
+                👋
+
+            </h1>
+
+        </div>
+
+        <!-- STATS -->
+
+        <div class="stats">
+
+            <div class="card">
+                <h2>120</h2>
+                <p>Total Books</p>
+            </div>
+
+            <div class="card">
+                <h2>36</h2>
+                <p>Readers</p>
+            </div>
+
+            <div class="card">
+                <h2>24</h2>
+                <p>Books Issued</p>
+            </div>
+
+            <div class="card">
+                <h2>5</h2>
+                <p>Your Rank</p>
+            </div>
+
+        </div>
+
+        <!-- ACTIONS -->
+
+        <div class="actions">
+
+            <div class="action-card">
+
+                <h3>📖 View Books</h3>
+
+                <button onclick="goBooks()">
+                    Open
+                </button>
+
+            </div>
+
+            <div class="action-card">
+
+                <h3>📚 My Books</h3>
+
+                <button onclick="goMyBooks()">
+                    Open
+                </button>
+
+            </div>
+
+            <div class="action-card">
+
+                <h3>🏆 Leaderboard</h3>
+
+                <button onclick="goLeaderboard()">
+                    Open
+                </button>
+
+            </div>
+
+            <!-- ADMIN CARD -->
+
+            <div
+                class="action-card"
+                id="adminCard"
+            >
+
+                <h3>👨‍💼 Admin Panel</h3>
+
+                <button onclick="goAdmin()">
+                    Open
+                </button>
+
+            </div>
+
+        </div>
+
+        <!-- QUOTE -->
+
+        <div class="quote">
+
+            <h2>📘 Quote of the Day</h2>
+
+            <p>
+                “A room without books is like a body without a soul.”
+            </p>
+
+        </div>
+
+    </div>
+
+<script>
+
+/* GET USER */
+
+const user =
+JSON.parse(localStorage.getItem("user"));
+
+/* GET ROLE */
+
+const role =
+localStorage.getItem("role");
+
+/* SHOW USERNAME */
+
+if(user){
+
+    document.getElementById("username").innerText =
+    user.name;
+
+}
+
+/* ADMIN / STUDENT CONTROL */
+
+if(role === "admin"){
+
+    document.getElementById("adminMenu")
+    .style.display = "block";
+
+    document.getElementById("adminCard")
+    .style.display = "block";
+
+}
+
+else{
+
+    document.getElementById("adminMenu")
+    .style.display = "none";
+
+    document.getElementById("adminCard")
+    .style.display = "none";
+
+}
+
+/* NAVIGATION */
+
+function goBooks(){
+
+    window.location.href =
+    "/books.html";
+
+}
+
+function goMyBooks(){
+
+    window.location.href =
+    "/mybooks.html";
+
+}
+
+function goLeaderboard(){
+
+    window.location.href =
+    "/leaderboard.html";
+
+}
+
+function goAdmin(){
+
+    if(role === "admin"){
+
+        window.location.href =
+        "/admin.html";
+
+    }
+
+    else{
+
+        alert(
+            "Access Denied! Admin Only"
+        );
+
+    }
+
+}
+
+/* LOGOUT */
+
+function logout(){
+
+    localStorage.clear();
+
+}
+
+</script>
+
+</body>
+
+</html>

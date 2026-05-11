@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>View Books</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body{
+            background: #f4f4fb;
+            display: flex;
+        }
+
+        /* SIDEBAR */
+
+        .sidebar{
+
+            width: 250px;
+            height: 100vh;
+
+            background:
+            linear-gradient(
+                to bottom,
+                #241b4b,
+                #3d2c8d
+            );
+
+            color: white;
+
+            padding: 30px 20px;
+
+            position: fixed;
+        }
+
+        .logo{
+
+            font-size: 28px;
+            font-weight: bold;
+
+            margin-bottom: 50px;
+        }
+
+        .menu{
+            list-style: none;
+        }
+
+        .menu li{
+            margin: 20px 0;
+        }
+
+        .menu a{
+
+            color: white;
+
+            text-decoration: none;
+
+            font-size: 18px;
+
+            display: block;
+
+            padding: 12px;
+
+            border-radius: 10px;
+
+            transition: 0.3s;
+        }
+
+        .menu a:hover{
+            background: rgba(255,255,255,0.2);
+        }
+
+        /* MAIN */
+
+        .main{
+
+            margin-left: 270px;
+
+            width: calc(100% - 270px);
+
+            padding: 30px;
+        }
+
+        .topbar{
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            margin-bottom: 30px;
+        }
+
+        .topbar h1{
+            color: #333;
+        }
+
+        .books-container{
+
+            display: grid;
+
+            grid-template-columns:
+            repeat(auto-fit, minmax(280px, 1fr));
+
+            gap: 25px;
+        }
+
+        .book-card{
+
+            background: white;
+
+            padding: 25px;
+
+            border-radius: 20px;
+
+            box-shadow:
+            0px 5px 15px rgba(0,0,0,0.1);
+
+            transition: 0.3s;
+        }
+
+        .book-card:hover{
+            transform: translateY(-8px);
+        }
+
+        .book-card h2{
+
+            color: #6c63ff;
+
+            margin-bottom: 10px;
+        }
+
+        .book-card p{
+
+            margin-bottom: 10px;
+
+            color: #555;
+        }
+
+        button{
+
+            width: 100%;
+
+            background: #6c63ff;
+
+            color: white;
+
+            border: none;
+
+            padding: 12px;
+
+            border-radius: 10px;
+
+            cursor: pointer;
+
+            font-size: 16px;
+
+            transition: 0.3s;
+        }
+
+        button:hover{
+            background: #574bdb;
+        }
+
+        .empty-text{
+
+            text-align: center;
+
+            font-size: 28px;
+
+            color: #666;
+
+            margin-top: 80px;
+
+            font-weight: bold;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <!-- SIDEBAR -->
+
+    <div class="sidebar">
+
+        <div class="logo">
+            📚 Library
+        </div>
+
+        <ul class="menu">
+
+            <li>
+                <a href="/dashboard.html">
+                    🏠 Dashboard
+                </a>
+            </li>
+
+            <li>
+                <a href="/books.html">
+                    📖 View Books
+                </a>
+            </li>
+
+            <li>
+                <a href="/mybooks.html">
+                    📚 My Books
+                </a>
+            </li>
+
+            <li>
+                <a href="/leaderboard.html">
+                    🏆 Leaderboard
+                </a>
+            </li>
+
+            <!-- ADMIN MENU -->
+
+            <li id="adminMenu">
+
+                <a href="/admin.html">
+                    👨‍💼 Admin Panel
+                </a>
+
+            </li>
+
+            <li>
+
+                <a
+                    href="/login.html"
+                    onclick="logout()"
+                >
+                    🚪 Logout
+                </a>
+
+            </li>
+
+        </ul>
+
+    </div>
+
+    <!-- MAIN -->
+
+    <div class="main">
+
+        <div class="topbar">
+
+            <h1>
+                📚 Available Books
+            </h1>
+
+        </div>
+
+        <div
+            class="books-container"
+            id="booksContainer"
+        >
+
+        </div>
+
+    </div>
+
+<script>
+
+/* GET ROLE */
+
+const role =
+localStorage.getItem("role");
+
+/* HIDE ADMIN FOR STUDENTS */
+
+if(role !== "admin"){
+
+    document.getElementById("adminMenu")
+    .style.display = "none";
+
+}
+
+/* LOAD BOOKS */
+
+async function loadBooks(){
+
+    try{
+
+        const response = await fetch(
+            "http://127.0.0.1:8000/books"
+        );
+
+        const books = await response.json();
+
+        const container =
+        document.getElementById("booksContainer");
+
+        container.innerHTML = "";
+
+        /* NO BOOKS */
+
+        if(books.length === 0){
+
+            container.innerHTML = `
+
+                <h2 class="empty-text">
+
+                    No Books Available
+
+                </h2>
+
+            `;
+
+            return;
+
+        }
+
+        /* SHOW BOOKS */
+
+        books.forEach(book => {
+
+            container.innerHTML += `
+
+                <div class="book-card">
+
+                    <h2>
+                        ${book.title}
+                    </h2>
+
+                    <p>
+                        <strong>Author:</strong>
+                        ${book.author}
+                    </p>
+
+                    <p>
+                        <strong>Category:</strong>
+                        ${book.category}
+                    </p>
+
+                    <p>
+                        <strong>Total Quantity:</strong>
+                        ${book.quantity}
+                    </p>
+
+                    <p>
+                        <strong>Available:</strong>
+                        ${book.available_quantity}
+                    </p>
+
+                    <button
+                        onclick="issueBook(${book.id})"
+                    >
+                        Issue Book
+                    </button>
+
+                </div>
+
+            `;
+
+        });
+
+    }
+
+    catch(error){
+
+        console.log(error);
+
+        alert("Failed to Load Books");
+
+    }
+
+}
+
+/* ISSUE BOOK */
+
+async function issueBook(bookId){
+
+    const user =
+    JSON.parse(localStorage.getItem("user"));
+
+    if(!user){
+
+        alert("Please Login");
+
+        return;
+
+    }
+
+    const formData = new FormData();
+
+    formData.append("user_id", user.id);
+
+    formData.append("book_id", bookId);
+
+    try{
+
+        const response = await fetch(
+
+            "http://127.0.0.1:8000/issue-book",
+
+            {
+                method: "POST",
+                body: formData
+            }
+
+        );
+
+        const data = await response.json();
+
+        alert(data.message || data.error);
+
+        loadBooks();
+
+    }
+
+    catch(error){
+
+        console.log(error);
+
+        alert("Issue Failed");
+
+    }
+
+}
+
+/* LOGOUT */
+
+function logout(){
+
+    localStorage.clear();
+
+}
+
+/* INITIAL LOAD */
+
+loadBooks();
+
+</script>
+
+</body>
+
+</html>
